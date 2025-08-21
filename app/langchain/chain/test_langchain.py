@@ -1,8 +1,9 @@
 import os
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
+
+from ..common.common import qwen_llm
 
 # 加载环境变量
 load_dotenv()
@@ -16,12 +17,7 @@ prompt = ChatPromptTemplate.from_messages(
 )
 
 # 创建模型
-llm = ChatOpenAI(
-    model="qwen-plus",
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url=os.getenv("DASHSCOPE_BASE_URL"),
-    temperature=0.6,
-)
+llm = qwen_llm
 
 # 构造Chain
 chain = prompt | llm | StrOutputParser()

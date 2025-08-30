@@ -13,5 +13,5 @@ qwen_llm = ChatOpenAI(
     model="qwen-plus",
     api_key=os.getenv("DASHSCOPE_API_KEY"),
     base_url=os.getenv("DASHSCOPE_BASE_URL"),
-    temperature=0.6,
+    temperature=0.8,
 )

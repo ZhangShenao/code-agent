@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from ..common.common import qwen_llm
+from common import qwen_llm
 
 # 加载环境变量
 load_dotenv()

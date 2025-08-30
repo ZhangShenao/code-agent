@@ -2,7 +2,7 @@
 
 from langchain_core.tools import tool
 from pydantic import BaseModel, Field
-from ..common.common import qwen_llm
+from common import qwen_llm
 from langchain.prompts import ChatPromptTemplate
 
 

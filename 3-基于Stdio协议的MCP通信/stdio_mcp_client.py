@@ -2,14 +2,14 @@
 
 
 import asyncio
+import os
 from dotenv import load_dotenv
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from langchain_mcp_adapters.tools import load_mcp_tools
-from langgraph.prebuilt import create_react_agent
-import os
-from langchain.agents import initialize_agent, AgentType, AgentExecutor
+from langchain.agents import initialize_agent, AgentType
 from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
 
 
 async def run_stdio_mcp_client(query: str):
@@ -43,11 +43,21 @@ async def run_stdio_mcp_client(query: str):
             print(tools)
 
             # 创建React Agent
-            agent = create_react_agent(llm, tools)
+            agent = initialize_agent(
+                tools=tools,
+                llm=llm,
+                agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION,  # 指定Agent类型为STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION
+                verbose=True,  # 开启verbose，打印详细信息
+            )
+            # 创建Prompt
+            prompt = ChatPromptTemplate.from_messages([("user", query)])
 
-            # 调用Agent
-            response = await agent.ainvoke(input={"messages": [("user", query)]})
-            print(response)
+            # 构造chain
+            chain = prompt | agent
+
+            # 执行Chain,获取结果
+            result = await chain.ainvoke({})
+            print(result["output"])
 
 
 if __name__ == "__main__":

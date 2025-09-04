@@ -1,4 +1,4 @@
-# 简单的历史对话记录存储
+# 在内存中保存历史对话记录
 
 from typing import Dict
 from langchain_core.chat_history import BaseChatMessageHistory

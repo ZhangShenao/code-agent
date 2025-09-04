@@ -4,7 +4,7 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 # 代码助手系统提示词
-code_agent_system_prompt = ChatPromptTemplate.from_messages(
+CODE_AGENT_SYSTEM_PROMPT = ChatPromptTemplate.from_messages(
     [
         (
             "system",

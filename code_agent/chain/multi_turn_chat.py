@@ -1,15 +1,14 @@
 # 多轮对话Chain
 
-from prompt.code_agent_system_prompt import code_agent_system_prompt
+from prompt.code_agent_system_prompt import CODE_AGENT_SYSTEM_PROMPT
 from llm.qwen import qwen_llm
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableWithMessageHistory
-from chat_history.simple_chat_history_store import get_session_history
-import uuid
+from chat_history.file_chat_history import get_session_history
 
 
 # 构造基础Chain
-chain = code_agent_system_prompt | qwen_llm | StrOutputParser()
+chain = CODE_AGENT_SYSTEM_PROMPT | qwen_llm | StrOutputParser()
 
 # 创建RunnableWithMessageHistory，封装了获取聊天历史记录的功能
 multi_turns_chat = RunnableWithMessageHistory(
@@ -19,8 +18,9 @@ multi_turns_chat = RunnableWithMessageHistory(
     history_messages_key="chat_history",  # 历史消息的key
 )
 
-# 通过UUID生成唯一的会话ID
-session_id = str(uuid.uuid4())
+# 模拟Session ID
+# 在实际应用中，应该基于用户id和对话id生成唯一的Session ID
+session_id = "1"
 
 # 交互式运行多轮对话
 while True:

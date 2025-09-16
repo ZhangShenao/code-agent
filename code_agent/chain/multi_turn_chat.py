@@ -1,9 +1,12 @@
 # 多轮对话Chain
 
-from prompt.code_agent_system_prompt import CODE_AGENT_SYSTEM_PROMPT
-from llm.qwen import qwen_llm
+# 第三方库导入
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableWithMessageHistory
+
+# 本地模块导入
+from prompt.code_agent_system_prompt import CODE_AGENT_SYSTEM_PROMPT
+from llm.qwen import qwen_llm
 from chat_history.file_chat_history import get_session_history
 
 
